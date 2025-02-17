@@ -1,29 +1,5 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
 Нужно:
 1. Использовать gem ActiveInteraction => https://github.com/AaronLasseigne/active_interaction отрефакторить класс Users::Create 
 
@@ -48,6 +24,8 @@ self.table_name = 'skills' в модели
 Во вторых на длинной дистанции единовременно затраченные часы окупятся как инвестиция.
 
 3. Исправить связи
+
+
 4. Поднять Rails приложение и в нем использовать класс Users::Create
 5. Написать тесты
 6. При рефакторнге кода использовать Декларативное описание(подход в программировании)
