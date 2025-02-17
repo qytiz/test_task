@@ -8,6 +8,7 @@ gem "sqlite3", ">= 1.4"
 gem "puma", ">= 5.0"
 gem "importmap-rails"
 gem "turbo-rails"
+gem 'haml-rails'
 gem "stimulus-rails"
 gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ mswin mswin64 mingw x64_mingw jruby ]

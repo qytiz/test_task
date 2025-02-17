@@ -1,0 +1,59 @@
+%h1 Создать нового пользователя
+
+= form_with(model: @user, url: users_path, local: true) do |f|
+  .form-group
+    %label{ for: 'user_surname' } Фамилия
+    = f.text_field :surname, value: 'Иванов',
+    class: 'form-control', placeholder: 'Введите фамилию'
+
+  .form-group
+    %label{ for: 'user_name' } Имя
+    = f.text_field :name, value: 'Иван',
+    class: 'form-control', placeholder: 'Введите имя'
+
+  .form-group
+    %label{ for: 'user_patronymic' } Отчество
+    = f.text_field :patronymic, value: 'Иванович',
+    class: 'form-control', placeholder: 'Введите отчество'
+
+  .form-group
+    %label{ for: 'user_email' } Email
+    = f.email_field :email, value: 'test@example.com',
+    class: 'form-control', placeholder: 'Введите email'
+
+  .form-group
+    %label{ for: 'user_age' } Возраст
+    = f.number_field :age, value: 25,
+    class: 'form-control', placeholder: 'Введите возраст'
+
+  .form-group
+    %label{ for: 'user_nationality' } Национальность
+    = f.text_field :nationality, value: 'Русский',
+    class: 'form-control', placeholder: 'Введите национальность'
+
+  .form-group
+    %label{ for: 'user_country' } Страна
+    = f.text_field :country, value: 'Россия',
+    class: 'form-control', placeholder: 'Введите страну'
+
+  .form-group
+    %label{ for: 'user_gender' } Пол
+    = f.select :gender, [%w[Мужской male], %w[Женский female]],
+    { selected: 'male' }, class: 'form-control'
+
+  .form-group
+    %label{ for: 'user_interests' } Интересы (через запятую)
+    = f.text_field :interests, value: 'спорт,музыка',
+    class: 'form-control', placeholder: 'Введите интересы'
+
+  .form-group
+    %label{ for: 'user_skills' } Навыки (через запятую)
+    = f.text_field :skills, value: 'рукоделие,коммуникации',
+    class: 'form-control', placeholder: 'Введите навыки'
+
+  .form-actions
+    = f.submit 'Создать', class: 'btn btn-primary'
+
+%br
+
+= link_to 'Cписок пользователей', users_path, class: 'btn btn-secondary'

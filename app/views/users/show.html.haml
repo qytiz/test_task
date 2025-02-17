@@ -1,0 +1,27 @@
+%h1 Информация о пользователе
+
+.card.card-body
+  %p
+    %strong ID:
+    = @user.id
+
+  %p
+    %strong Имя:
+    = @user.name
+
+  %p
+    %strong Email:
+    = @user.email
+
+  %p
+    %strong Возраст:
+    = @user.age
+
+  %p
+    %strong Пол:
+    = @user.gender == 'male' ? 'Мужской' : 'Женский'
+
+%br
+= link_to 'Назад к списку', users_path, class: 'btn btn-secondary'
+= link_to 'Удалить', user_path(@user), method: :delete,
+  data: { confirm: 'Точно удалить?' }, class: 'btn btn-danger'

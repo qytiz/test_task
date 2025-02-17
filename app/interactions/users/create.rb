@@ -1,10 +1,11 @@
-class User::Create < ActiveInteraction::Base
+class Users::Create < ActiveInteraction::Base
   hash :params
 
-  EXPECTED_FIELDS = %w[surname name patronymic email age nationality country gender]
+  USER_FIELDS = %w[surname name patronymic email age nationality country gender]
+  RELATED_MODELS = %w[interests skills]
 
   hash :params do
-    EXPECTED_FIELDS.each do |field|
+    (USER_FIELDS+RELATED_MODELS).each do |field|
       string field
     end
   end
@@ -14,28 +15,27 @@ class User::Create < ActiveInteraction::Base
   validate :gender_valid?
 
   def execute
-    user_full_name = "#{params['surname']} #{params['name']} #{params['patronymic']}"
-    user_params = params.slice(*EXPECTED_FIELDS)
-    user = User.create(user_params.merge(full_name: user_full_name))
+    user_params = params.slice(*USER_FIELDS.map(&:to_sym))
+    user = User.create(user_params)
 
-    user.interests = Interest.where(name: params['interests'].split(','))
-    user.skills = Skill.where(name: params['skills'].split(','))
+    user.interests = Interest.where(name: params[:interests].split(','))
+    user.skills = Skill.where(name: params[:skills].split(','))
 
     user.save
   end
 
   private
 
-  def data_present?
-    User.exists?(email: params['email'])
+  def user_exist?
+    User.exists?(email: params[:email])
   end
 
   def age_valid?
-    params['age'] > 0 && params['age'] <= 90
+    params[:age].to_i > 0 && params[:age].to_i < 100
   end
 
   def gender_valid?
-    params['gender'] != 'male' && params['gender'] != 'female'
+    params[:gender] != 'male' && params[:gender] != 'female'
   end
 end
 
