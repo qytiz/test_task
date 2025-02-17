@@ -14,9 +14,10 @@ gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ mswin mswin64 mingw x64_mingw jruby ]
 gem "bootsnap", require: false
 gem 'active_interaction', '~> 5.5'
+gem 'rubocop'
 
 group :development, :test do
-  gem "byebug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
+  gem 'pry-byebug'
 end
 
 group :development do
@@ -26,4 +27,9 @@ end
 group :test do
   gem "capybara"
   gem "selenium-webdriver"
+  gem 'rails-controller-testing'
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'shoulda-matchers', '~> 5.0'
 end

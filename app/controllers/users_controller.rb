@@ -9,8 +9,13 @@ class UsersController < ApplicationController
 
   def create
     result = Users::Create.run(params: user_params)
-    
-    redirect_to users_path unless result
+  
+    if result.valid?
+      redirect_to users_path, notice: 'Пользователь успешно создан'
+    else
+      flash[:error] = result.errors.full_messages.join(', ')
+      render :new
+    end
   end
 
   def new
