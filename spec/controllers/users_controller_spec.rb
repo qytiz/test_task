@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
@@ -45,7 +47,8 @@ RSpec.describe UsersController, type: :controller do
 
     context 'when Users::Create fails' do
       it 'renders the new template with an error message' do
-        create_interactor = instance_double(Users::Create, valid?: false, errors: double(full_messages: ['Ошибка создания']))
+        create_interactor = instance_double(Users::Create, valid?: false,
+                                                           errors: double(full_messages: ['Ошибка создания']))
         allow(Users::Create).to receive(:run).and_return(create_interactor)
 
         post :create, params: invalid_params
@@ -58,9 +61,9 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'DELETE #destroy' do
     it 'deletes the user and redirects to index' do
-      expect {
+      expect do
         delete :destroy, params: { id: user.id }
-      }.to change(User, :count).by(-1)
+      end.to change(User, :count).by(-1)
 
       expect(response).to redirect_to(users_path)
     end

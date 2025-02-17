@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject { build(:user) } 
+  subject { build(:user) }
 
   describe 'associations' do
     it { is_expected.to have_and_belong_to_many(:interests) }
@@ -21,16 +23,16 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
 
     it do
-      is_expected.to validate_numericality_of(:age).
-        only_integer.
-        is_greater_than(0).
-        is_less_than(100)
+      is_expected.to validate_numericality_of(:age)
+        .only_integer
+        .is_greater_than(0)
+        .is_less_than(100)
     end
 
     it do
-      is_expected.to validate_inclusion_of(:gender).
-        in_array(%w[male female]).
-        with_message("должен быть 'male' или 'female'")
+      is_expected.to validate_inclusion_of(:gender)
+        .in_array(%w[male female])
+        .with_message("должен быть 'male' или 'female'")
     end
   end
 

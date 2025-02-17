@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
+  USER_PARAMS = %i[surname name patronymic email age nationality country gender interests skills].freeze
   def index
     @users = User.all
   end
@@ -9,7 +12,7 @@ class UsersController < ApplicationController
 
   def create
     result = Users::Create.run(params: user_params)
-  
+
     if result.valid?
       redirect_to users_path, notice: 'Пользователь успешно создан'
     else
@@ -28,18 +31,12 @@ class UsersController < ApplicationController
   end
 
   private
+
   def user_params
-      params.require(:user).permit(
-        :surname, 
-        :name, 
-        :patronymic, 
-        :email, 
-        :age, 
-        :nationality, 
-        :country, 
-        :gender, 
-        :interests, 
-        :skills
-      )
+    params.require(:user).permit(
+      *USER_PARAMS,
+      interests: [],
+      skills: []
+    )
   end
 end

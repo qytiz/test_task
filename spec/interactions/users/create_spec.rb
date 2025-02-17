@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Users::Create, type: :interaction do
@@ -94,9 +96,9 @@ RSpec.describe Users::Create, type: :interaction do
         create(:skill, name: 'рукоделие')
         create(:skill, name: 'коммуникации')
       end
-      
+
       it 'assigns the correct interests and skills' do
-        result = described_class.run(params: valid_params)
+        described_class.run(params: valid_params)
         user = User.find_by(email: 'ivanov@example.com')
         interest_names = user.interests.pluck(:name)
         skill_names = user.skills.pluck(:name)
